@@ -5694,16 +5694,16 @@
         },
         {
             "name": "zhaolinlau/ui",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zhaolinlau/ui.git",
-                "reference": "986c70e68d3d6db868503cb16ad7e1e4adb5c940"
+                "reference": "13e60dd03fc8c423f97810bd15c803a1f44d82d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zhaolinlau/ui/zipball/986c70e68d3d6db868503cb16ad7e1e4adb5c940",
-                "reference": "986c70e68d3d6db868503cb16ad7e1e4adb5c940",
+                "url": "https://api.github.com/repos/zhaolinlau/ui/zipball/13e60dd03fc8c423f97810bd15c803a1f44d82d3",
+                "reference": "13e60dd03fc8c423f97810bd15c803a1f44d82d3",
                 "shasum": ""
             },
             "require": {
@@ -5751,9 +5751,9 @@
                 "ui"
             ],
             "support": {
-                "source": "https://github.com/zhaolinlau/ui/tree/v1.0.4"
+                "source": "https://github.com/zhaolinlau/ui/tree/v1.0.5"
             },
-            "time": "2024-03-23T18:55:09+00:00"
+            "time": "2024-05-13T17:59:32+00:00"
         }
     ],
     "packages-dev": [
