@@ -7,7 +7,7 @@
 
 				<div class="mb-3 text-center">
 					<a href="{{ route('login') }}">
-						<img class="rounded w-50" src="img/logo.png" alt="logo.png">
+						<img class="rounded w-50" src="/img/logo.png" alt="logo.png">
 					</a>
 				</div>
 
