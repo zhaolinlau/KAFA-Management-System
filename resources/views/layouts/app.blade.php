@@ -75,7 +75,7 @@
 							<a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Registration</a>
+							<a class="nav-link {{ Route::is('students.index') ? 'active' : '' }}" href="{{route('students.index')}}">Registration</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Activities</a>
