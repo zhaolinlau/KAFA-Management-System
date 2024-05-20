@@ -16,6 +16,7 @@ return new class extends Migration
 			$table->foreignId('user_id')->constrained()->cascadeOnDelete();
 			$table->string('parent_ic_no');
 			$table->string('parent_ic');
+			$table->string('parent_contact');
 			$table->string('relationship');
 			$table->string('student_name');
 			$table->string('birthday');
@@ -24,9 +25,9 @@ return new class extends Migration
 			$table->string('student_ic_no');
 			$table->string('student_ic');
 			$table->string('student_birthcert');
-			$table->string('status');
-			$table->string('matric_no');
-			$table->string('year');
+			$table->string('status')->default('Pending');
+			$table->string('matric_no')->default('');
+			$table->string('year')->default('');
 			$table->timestamps();
 		});
 	}
