@@ -14,7 +14,7 @@ class StudentController extends Controller
 	public function index()
 	{
 		if (auth()->user()->role == 'parent') {
-			return view('ManageStudentRegistration.Parent.RegistrationList');
+			return view('ManageStudentRegistration.Parent.RegistrationList', ['students' => Student::with('user')->where('user_id', auth()->user()->id)->get()]);
 		} elseif (auth()->user()->role == 'admin') {
 			return view('ManageStudentRegistration.Admin.RegistrationList');
 		}
