@@ -10,6 +10,23 @@ class Student extends Model
 {
 	use HasFactory;
 
+	protected $fillable = [
+		'parent_ic_no',
+		'parent_ic',
+		'parent_contact',
+		'relationship',
+		'student_name',
+		'birthday',
+		'birthplace',
+		'permanent_address',
+		'student_ic_no',
+		'student_ic',
+		'student_birthcert',
+		'status',
+		'matric_no',
+		'year',
+	];
+
 	public function user(): BelongsTo
 	{
 		return $this->belongsTo(User::class);

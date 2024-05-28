@@ -35,7 +35,7 @@ class StudentController extends Controller
 	{
 		$request->validate([
 			'parent_ic_no' => 'required|string',
-			'parent_ic' => ['required', File::types(['pdf', 'png', 'jpeg', 'jpg'])],
+			'parent_ic' => 'required|file|mimes:png,jpg,pdf',
 			'parent_contact' => 'required|string',
 			'relationship' => 'required|string',
 			'student_name' => 'required|string',
@@ -43,11 +43,16 @@ class StudentController extends Controller
 			'birthplace' => 'required|string',
 			'permanent_address' => 'required|string',
 			'student_ic_no' => 'required|string',
-			'student_ic' => ['required', File::types(['pdf', 'png', 'jpeg', 'jpg'])],
-			'student_birthcert' => ['required', File::types(['pdf', 'png', 'jpeg', 'jpg'])],
+			'student_ic' => 'required|file|mimes:png,jpg,pdf',
+			'student_birthcert' => 'required|file|mimes:png,jpg,pdf',
 		]);
 
-		$request->user()->students()->create($request->all());
+
+		$request->user()->students()->create(array_merge($request->all(), [
+			'parent_ic' => $request->file('parent_ic')->store($request->parent_ic_no, 'public'),
+			'student_ic' => $request->file('student_ic')->store($request->student_ic_no, 'public'),
+			'student_birthcert' => $request->file('student_birthcert')->store($request->student_ic_no, 'public'),
+		]));
 
 		return redirect(route('students.index'));
 	}
