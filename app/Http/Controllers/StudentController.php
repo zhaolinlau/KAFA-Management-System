@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\File;
 
 class StudentController extends Controller
 {
@@ -32,7 +33,23 @@ class StudentController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		//
+		$request->validate([
+			'parent_ic_no' => 'required|string',
+			'parent_ic' => ['required', File::types(['pdf', 'png', 'jpeg', 'jpg'])],
+			'parent_contact' => 'required|string',
+			'relationship' => 'required|string',
+			'student_name' => 'required|string',
+			'birthday' => 'required|date',
+			'birthplace' => 'required|string',
+			'permanent_address' => 'required|string',
+			'student_ic_no' => 'required|string',
+			'student_ic' => ['required', File::types(['pdf', 'png', 'jpeg', 'jpg'])],
+			'student_birthcert' => ['required', File::types(['pdf', 'png', 'jpeg', 'jpg'])],
+		]);
+
+		$request->user()->students()->create($request->all());
+
+		return redirect(route('students.index'));
 	}
 
 	/**
