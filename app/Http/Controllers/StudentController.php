@@ -63,7 +63,7 @@ class StudentController extends Controller
 	 */
 	public function show(Student $student)
 	{
-		//
+		return view('ManageStudentRegistration.Parent.StudentRegistrationForm', ['student' => $student]);
 	}
 
 	/**

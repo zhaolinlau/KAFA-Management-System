@@ -28,7 +28,7 @@
 										<td>{{ $student->student_name }}</td>
 										<td>{{ $student->status }}</td>
 										<td>
-											<a class="btn btn-info" href="">View</a>
+											<a class="btn btn-info" href="{{ route('students.show', $student) }}">View</a>
 											<form action="{{ route('students.destroy', $student) }}" method="post" class="d-inline-block">
 												@csrf
 												@method('delete')
