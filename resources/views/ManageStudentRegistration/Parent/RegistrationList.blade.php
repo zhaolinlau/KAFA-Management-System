@@ -29,7 +29,7 @@
 										<td>{{ $student->status }}</td>
 										<td>
 											<a class="btn btn-info" href="">View</a>
-											<form action="" method="post" class="d-inline-block">
+											<form action="{{ route('students.destroy', $student) }}" method="post" class="d-inline-block">
 												@csrf
 												@method('delete')
 												<button type="submit" class="btn btn-danger">Cancel</button>

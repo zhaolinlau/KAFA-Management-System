@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
 
 class StudentController extends Controller
@@ -86,6 +87,9 @@ class StudentController extends Controller
 	 */
 	public function destroy(Student $student)
 	{
-		//
+		$student->delete();
+		Storage::disk('public')->deleteDirectory($student->parent_ic_no);
+		Storage::disk('public')->deleteDirectory($student->student_ic_no);
+		return redirect(route('students.index'));
 	}
 }
