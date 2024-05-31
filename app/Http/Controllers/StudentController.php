@@ -40,7 +40,7 @@ class StudentController extends Controller
 			'parent_contact' => 'required|string',
 			'relationship' => 'required|string',
 			'student_name' => 'required|string',
-			'birthday' => 'required|date',
+			'birthday' => 'required|date|string',
 			'birthplace' => 'required|string',
 			'permanent_address' => 'required|string',
 			'student_ic_no' => 'required|string',
