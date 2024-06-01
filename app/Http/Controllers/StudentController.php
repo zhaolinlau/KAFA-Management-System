@@ -18,7 +18,7 @@ class StudentController extends Controller
 		if (auth()->user()->role == 'parent') {
 			return view('ManageStudentRegistration.Parent.RegistrationList', ['students' => Student::with('user')->where('user_id', auth()->user()->id)->get()]);
 		} elseif (auth()->user()->role == 'admin') {
-			return view('ManageStudentRegistration.Admin.RegistrationList');
+			return view('ManageStudentRegistration.Admin.RegistrationList', ['students' => Student::with('user')->get()]);
 		}
 	}
 
@@ -64,7 +64,11 @@ class StudentController extends Controller
 	 */
 	public function show(Student $student): View
 	{
-		return view('ManageStudentRegistration.Parent.StudentRegistrationForm', ['student' => $student]);
+		if (auth()->user()->role == 'parent') {
+			return view('ManageStudentRegistration.Parent.StudentRegistrationForm', ['student' => $student]);
+		} elseif (auth()->user()->role == 'admin') {
+			return view('ManageStudentRegistration.Admin.StudentRegistrationForm', ['student' => $student]);
+		}
 	}
 
 	/**
@@ -72,7 +76,7 @@ class StudentController extends Controller
 	 */
 	public function edit(Student $student): View
 	{
-		return view('ManageStudentRegistration.Parent.StudentRegistrationForm', ['student' => $student]);
+		return view('ManageStudentRegistration.Admin.StudentRegistrationForm', ['student' => $student]);
 	}
 
 	/**
@@ -81,25 +85,11 @@ class StudentController extends Controller
 	public function update(Request $request, Student $student): RedirectResponse
 	{
 		$request->validate([
-			'parent_ic_no' => 'required|string',
-			'parent_ic' => 'required|file|mimes:png,jpg,pdf',
-			'parent_contact' => 'required|string',
-			'relationship' => 'required|string',
-			'student_name' => 'required|string',
-			'birthday' => 'required|date|string',
-			'birthplace' => 'required|string',
-			'permanent_address' => 'required|string',
-			'student_ic_no' => 'required|string',
-			'student_ic' => 'required|file|mimes:png,jpg,pdf',
-			'student_birthcert' => 'required|file|mimes:png,jpg,pdf',
+			'status' => 'required|string'
 		]);
 
 
-		$student->update(array_merge($request->all(), [
-			'parent_ic' => $request->file('parent_ic')->store($request->parent_ic_no, 'public'),
-			'student_ic' => $request->file('student_ic')->store($request->student_ic_no, 'public'),
-			'student_birthcert' => $request->file('student_birthcert')->store($request->student_ic_no, 'public'),
-		]));
+		$student->update($request->all());
 
 		return redirect(route('students.index'));
 	}
