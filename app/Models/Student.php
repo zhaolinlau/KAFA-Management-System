@@ -10,8 +10,8 @@ class Student extends Model
 {
 	use HasFactory;
 
-	public function user(): BelongsTo
-	{
-		return $this->belongsTo(User::class);
-	}
+    public function activityParticipants()
+    {
+        return $this->hasMany(ActivityParticipant::class, 'studentsId');
+    }
 }

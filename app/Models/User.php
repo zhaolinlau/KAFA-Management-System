@@ -43,11 +43,18 @@ class User extends Authenticatable implements MustVerifyEmail
 		return [
 			'email_verified_at' => 'datetime',
 			'password' => 'hashed',
+
 		];
 	}
 
 	public function students(): HasMany
 	{
 		return $this->hasMany(Student::class);
+	}
+
+
+	public function activityParticipants(): HasMany
+	{
+		return $this->hasMany(activityParticipant::class, 'usersId');
 	}
 }

@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\StudentController;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
 	return redirect(route('login'));
@@ -25,3 +27,37 @@ Route::middleware(['verified'])->group(function () {
 	Route::put('/students/{student}', [StudentController::class, 'update'])->name('students.update');
 	Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
 });
+
+
+// Module 2 - Manage Activity (MUHAMMAD AZIQUDDIN CB21057)
+Route::get('createActivity', function () {
+    return view('manageActivityView.adminView.createActivity');
+})->name('createActivity'); // Define named route here
+
+Route::post('submit', [activityController::class, 'create']);
+
+Route::get('createdActivity/List', [activityController::class, 'index'])->name('createdActivityList');
+
+Route::get('createdActivity/{activityId}/edit', [activityController::class, 'edit'])->name('editActivity');
+
+Route::post('createdActivity/{activityId}/update', [activityController::class, 'update'])->name('updateActivity');
+
+Route::get('createdActivity/{activityId}/delete', [activityController::class, 'destroy'])->name('deleteActivity');
+
+Route::get('registerActivity', [ActivityController::class, 'displayActivity'])->name('displayActivity');
+
+Route::post('registerParticipant/{participantId}/register', [ActivityController::class, 'registerActivity'])->name('registerActivity');
+
+Route::get('registration/List', [ActivityController::class, 'displayRegistration'])->name('displayRegistration');
+
+Route::get('search/Registration', [ActivityController::class, 'searchRegistration'])->name('searchRegistration');
+
+Route::post('registration/{participantId}/approval', [ActivityController::class, 'updateStatus'])->name('updateStatus');
+
+Route::get('registration/{participantId}/reject',[ActivityController::class, 'destroyRegistration'])->name('destroyRegistration');
+
+Route::get('display/participant', [ActivityController::class, 'displayParticipant'])->name('displayParticipant');
+
+Route::get('search/Participant', [ActivityController::class, 'searchParticipant'])->name('searchParticipant');
+
+Route::get('delete/{participantId}/participant', [ActivityController::class, 'deleteParticipant'])->name('deleteParticipant');
