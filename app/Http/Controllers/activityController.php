@@ -192,7 +192,7 @@ class ActivityController extends Controller
     //PARENTS
 
     //Display Activity to register
-    public function displayActivity()
+    public function displayActivity() 
     {
         $userId = Auth::id();
 

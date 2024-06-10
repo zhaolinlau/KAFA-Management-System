@@ -61,3 +61,4 @@ Route::get('display/participant', [ActivityController::class, 'displayParticipan
 Route::get('search/Participant', [ActivityController::class, 'searchParticipant'])->name('searchParticipant');
 
 Route::get('delete/{participantId}/participant', [ActivityController::class, 'deleteParticipant'])->name('deleteParticipant');
+Route::resource('students', StudentController::class)->middleware(['verified']);

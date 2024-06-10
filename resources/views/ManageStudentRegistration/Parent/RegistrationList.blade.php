@@ -22,15 +22,21 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>William Lau</td>
-									<td>Verified</td>
-									<td>
-										<button class="btn btn-info">View</button>
-										<button class="btn btn-danger">Cancel</button>
-									</td>
-								</tr>
+								@foreach ($students as $student)
+									<tr>
+										<th scope="row">{{ $loop->iteration }}</th>
+										<td>{{ $student->student_name }}</td>
+										<td>{{ $student->status }}</td>
+										<td>
+											<a class="btn btn-info" href="{{ route('students.show', $student) }}">View</a>
+											<form action="{{ route('students.destroy', $student) }}" method="post" class="d-inline-block">
+												@csrf
+												@method('delete')
+												<button type="submit" class="btn btn-danger">Cancel</button>
+											</form>
+										</td>
+									</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>
