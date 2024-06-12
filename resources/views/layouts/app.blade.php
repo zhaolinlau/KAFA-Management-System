@@ -37,11 +37,6 @@
 						</button>
 
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav me-auto">
-								<li class="nav-item">
-									<a class="nav-link" href="{{ route('timetables.index') }}">Timetable</a>
-								</li>
-							</ul>
 							<ul class="navbar-nav ms-auto">
 								<!-- Authentication Links -->
 								<li class="nav-item dropdown">
@@ -86,7 +81,7 @@
 							<a class="nav-link" href="#">Result</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Timetable</a>
+							<a class="nav-link {{ Route::is('timetables.index') ? 'active' : '' }}" href="{{ route('timetables.index') }}">Timetable</a>
 						</li>
 					</ul>
 				</div>
