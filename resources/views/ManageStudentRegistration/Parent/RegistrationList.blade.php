@@ -29,11 +29,13 @@
 										<td>{{ $student->status }}</td>
 										<td>
 											<a class="btn btn-info" href="{{ route('students.show', $student) }}">View</a>
-											<form action="{{ route('students.destroy', $student) }}" method="post" class="d-inline-block">
-												@csrf
-												@method('delete')
-												<button type="submit" class="btn btn-danger">Cancel</button>
-											</form>
+											@if ($student->status != 'Approved')
+												<form action="{{ route('students.destroy', $student) }}" method="post" class="d-inline-block">
+													@csrf
+													@method('delete')
+													<button type="submit" class="btn btn-danger">Cancel</button>
+												</form>
+											@endif
 										</td>
 									</tr>
 								@endforeach

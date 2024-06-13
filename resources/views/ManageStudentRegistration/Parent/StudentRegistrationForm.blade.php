@@ -11,8 +11,8 @@
 						@csrf
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="parent_ic_no">Parent IC Number</label>
-							<input class="form-control @error('parent_ic_no') is-invalid @enderror" type="text" name="parent_ic_no"
-								id="parent_ic_no">
+							<input class="form-control @error('parent_ic_no') is-invalid @enderror" type="text"
+								value="{{ old('parent_ic_no') }}" name="parent_ic_no" id="parent_ic_no">
 							@error('parent_ic_no')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -21,8 +21,8 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="parent_ic">Parent IC</label>
-							<input class="form-control @error('parent_ic') is-invalid @enderror" type="file" name="parent_ic"
-								id="parent_ic">
+							<input class="form-control @error('parent_ic') is-invalid @enderror" value="{{ old('parent_ic') }}" type="file"
+								name="parent_ic" id="parent_ic">
 							@error('parent_ic')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -31,8 +31,8 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="parent_contact">Parent Contact</label>
-							<input class="form-control @error('parent_contact') is-invalid @enderror" type="tel" name="parent_contact"
-								id="parent_contact">
+							<input class="form-control @error('parent_contact') is-invalid @enderror" value="{{ old('parent_contact') }}"
+								type="tel" name="parent_contact" id="parent_contact">
 							@error('parent_contact')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -42,7 +42,7 @@
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="relationship">Relationship</label>
 							<select class="form-control @error('relationship') is-invalid @enderror" name="relationship" id="relationship">
-								<option value="" selected></option>
+								<option value="{{ old('relationship') }}" hidden selected>{{ old('relationship') }}</option>
 								<option value="Father">Father</option>
 								<option value="Mother">Mother</option>
 								<option value="Guardian">Guardian</option>
@@ -55,8 +55,8 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="student_name">Student Name</label>
-							<input class="form-control @error('student_name') is-invalid @enderror" type="text" name="student_name"
-								id="student_name">
+							<input class="form-control @error('student_name') is-invalid @enderror" value="{{ old('student_name') }}"
+								type="text" name="student_name" id="student_name">
 							@error('student_name')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -65,7 +65,8 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="birthday">Student Birthday</label>
-							<input class="form-control @error('birthday') is-invalid @enderror" type="date" name="birthday" id="birthday">
+							<input class="form-control @error('birthday') is-invalid @enderror" value="{{ old('birthday') }}" type="date"
+								name="birthday" id="birthday">
 							@error('birthday')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -74,8 +75,8 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="birthplace">Student Birthplace</label>
-							<input class="form-control @error('birthplace') is-invalid @enderror" type="text" name="birthplace"
-								id="birthplace">
+							<input class="form-control @error('birthplace') is-invalid @enderror" value="{{ old('birthplace') }}"
+								type="text" name="birthplace" id="birthplace">
 							@error('birthplace')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -85,7 +86,7 @@
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="permanent_address">Permanent Address</label>
 							<textarea class="form-control @error('permanent_address') is-invalid @enderror" name="permanent_address"
-							 id="permanent_address"></textarea>
+							 id="permanent_address">{{ old('permanent_address') }}</textarea>
 							@error('permanent_address')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -95,7 +96,7 @@
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="student_ic_no">Student IC Number</label>
 							<input class="form-control @error('student_ic_no') is-invalid @enderror" type="text" name="student_ic_no"
-								id="student_ic_no"></input>
+								id="student_ic_no" value="{{ old('student_ic_no') }}"></input>
 							@error('student_ic_no')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -105,7 +106,7 @@
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="student_ic">Student IC</label>
 							<input class="form-control @error('student_ic') is-invalid @enderror" type="file" name="student_ic"
-								id="student_ic">
+								id="student_ic" value="{{ old('student_ic') }}">
 							@error('student_ic')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -115,7 +116,7 @@
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="student_birthcert">Student Birth Certificate</label>
 							<input class="form-control @error('student_birthcert') is-invalid @enderror" type="file"
-								name="student_birthcert" id="student_birthcert">
+								name="student_birthcert" id="student_birthcert" value="{{ old('student_birthcert') }}">
 							@error('student_birthcert')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -190,6 +191,18 @@
 						<label class="form-label" for="student_birthcert">Student Birth Certificate</label>
 						<div>
 							<a href="/storage/{{ $student->student_birthcert }}" target="blank">{{ $student->student_birthcert }}</a>
+						</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label class="form-label" for="status">Registration Status</label>
+						<div name="status" id="status">
+							{{ $student->status }}
+						</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label class="form-label" for="status">Matric Number</label>
+						<div>
+							{{ $student->matric_no }}
 						</div>
 					</div>
 					<div class="col-12 mt-3">
