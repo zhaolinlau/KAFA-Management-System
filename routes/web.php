@@ -19,8 +19,6 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['verified']);
 
-
-
 // Route::resource('timetables', TimetableController::class);
 Route::get('/timetables', [TimetableController::class, 'index'])->name('timetables.index')->middleware(['verified']);
 Route::get('/timetables/create', [TimetableController::class, 'create'])->name('timetables.create')->middleware(['verified']);
@@ -65,7 +63,6 @@ Route::get('registration/{participantId}/reject', [ActivityController::class, 'd
 Route::get('display/participant', [ActivityController::class, 'displayParticipant'])->name('displayParticipant');
 Route::get('search/Participant', [ActivityController::class, 'searchParticipant'])->name('searchParticipant');
 Route::get('delete/{participantId}/participant', [ActivityController::class, 'deleteParticipant'])->name('deleteParticipant');
-Route::resource('students', StudentController::class)->middleware(['verified']);
 
 
 // Module 4 - Manage Timetable (EMYLIA AQILA CB21090)
