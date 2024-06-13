@@ -170,7 +170,7 @@
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="status">Registration Status</label>
 							<select class="form-control @error('status') is-invalid @enderror" name="status" id="status">
-								<option value="{{ $student->status }}" selected>{{ $student->status }}</option>
+								<option value="{{ $student->status }}" hidden selected>{{ $student->status }}</option>
 								<option value="Pending">Pending</option>
 								<option value="Approved">Approve</option>
 								<option value="Rejected">Reject</option>
@@ -183,7 +183,8 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="status">Matric Number</label>
-							<input type="text" name="matric_no" class="form-control @error('matric_no') is-invalid @enderror" value="{{ $student->matric_no }}">
+							<input type="text" name="matric_no" class="form-control @error('matric_no') is-invalid @enderror"
+								value="{{ $student->matric_no }}">
 							@error('matric_no')
 								<div class="invalid-feedback">
 									{{ $message }}
