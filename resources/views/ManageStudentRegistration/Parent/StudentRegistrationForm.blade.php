@@ -12,10 +12,7 @@
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="parent_ic_no">Parent IC Number</label>
 							<input class="form-control @error('parent_ic_no') is-invalid @enderror" type="text"
-								value="{{ old('parent_ic_no') }}" name="parent_ic_no" id="parent_ic_no">
-							<div class="form-text text-info">
-								Only png, jpg, pdf file formats are accpected.
-							</div>
+								value="{{ old('parent_ic_no') }}" name="parent_ic_no" id="parent_ic_no">							
 							@error('parent_ic_no')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -26,6 +23,9 @@
 							<label class="form-label" for="parent_ic">Parent IC</label>
 							<input class="form-control @error('parent_ic') is-invalid @enderror" value="{{ old('parent_ic') }}" type="file"
 								name="parent_ic" id="parent_ic">
+								<div class="form-text text-info">
+									Only png, jpg, pdf file formats are accpected.
+								</div>
 							@error('parent_ic')
 								<div class="invalid-feedback">
 									{{ $message }}
