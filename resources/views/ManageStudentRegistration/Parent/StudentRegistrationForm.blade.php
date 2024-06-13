@@ -12,7 +12,7 @@
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="parent_ic_no">Parent IC Number</label>
 							<input class="form-control @error('parent_ic_no') is-invalid @enderror" type="text"
-								value="{{ old('parent_ic_no') }}" name="parent_ic_no" id="parent_ic_no">
+								value="{{ old('parent_ic_no') }}" name="parent_ic_no" id="parent_ic_no">							
 							@error('parent_ic_no')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -23,6 +23,9 @@
 							<label class="form-label" for="parent_ic">Parent IC</label>
 							<input class="form-control @error('parent_ic') is-invalid @enderror" value="{{ old('parent_ic') }}" type="file"
 								name="parent_ic" id="parent_ic">
+								<div class="form-text text-info">
+									Only png, jpg, pdf file formats are accpected.
+								</div>
 							@error('parent_ic')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -96,7 +99,7 @@
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="student_ic_no">Student IC Number</label>
 							<input class="form-control @error('student_ic_no') is-invalid @enderror" type="text" name="student_ic_no"
-								id="student_ic_no" value="{{ old('student_ic_no') }}"></input>
+								id="student_ic_no" value="{{ old('student_ic_no') }}">
 							@error('student_ic_no')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -107,6 +110,9 @@
 							<label class="form-label" for="student_ic">Student IC</label>
 							<input class="form-control @error('student_ic') is-invalid @enderror" type="file" name="student_ic"
 								id="student_ic" value="{{ old('student_ic') }}">
+							<div class="form-text text-info">
+								Only png, jpg, pdf file formats are accpected.
+							</div>
 							@error('student_ic')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -117,6 +123,9 @@
 							<label class="form-label" for="student_birthcert">Student Birth Certificate</label>
 							<input class="form-control @error('student_birthcert') is-invalid @enderror" type="file"
 								name="student_birthcert" id="student_birthcert" value="{{ old('student_birthcert') }}">
+							<div class="form-text text-info">
+								Only png, jpg, pdf file formats are accpected.
+							</div>
 							@error('student_birthcert')
 								<div class="invalid-feedback">
 									{{ $message }}
@@ -199,12 +208,20 @@
 							{{ $student->status }}
 						</div>
 					</div>
-					<div class="col-md-6 mb-3">
-						<label class="form-label" for="status">Matric Number</label>
-						<div>
-							{{ $student->matric_no }}
+					@if ($student->status == 'Approved')
+						<div class="col-md-6 mb-3">
+							<label class="form-label" for="matric_no">Matric Number</label>
+							<div>
+								{{ $student->matric_no }}
+							</div>
 						</div>
-					</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label" for="year">Year</label>
+							<div>
+								{{ $student->year }}
+							</div>
+						</div>
+					@endif
 					<div class="col-12 mt-3">
 						<a class="btn btn-danger" href="{{ route('students.index', $student) }}">Back</a>
 					</div>

@@ -8,18 +8,32 @@ use Illuminate\Http\Request;
 
 class TimetableController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $class_name = $request->input('class_name');
         $timetables = Timetable::with('entries')->get();
-        return view ('timetables.index', compact('timetables'));
+        $timetable = null;
+
+        if ($class_name) {
+            $timetable = Timetable::with('entries')->where('class_name', $class_name)->first();
+        }
+
+		if (auth()->user()->role == 'admin') {
+            return view('ManageTimetableviews.Adminviews.listTimetable', compact('timetables'));
+        }elseif (auth()->user()->role == 'parent') {
+            return view('ManageTimetableviews.Parentviews.studentTimetable', compact('timetables', 'timetable', 'class_name'));
+        }elseif (auth()->user()->role == 'teacher') {
+            return view('ManageTimetableviews.Teacherviews.teacherTimetable', compact('timetables', 'timetable', 'class_name'));
+        }
     }
 
+    // function create timetable 
     public function create()
     {
-        return view('timetables.createTimetable');
+        return view('ManageTimetableviews.Adminviews.createTimetable');
     }
 
-
+    // function store data from create timetable page 
     public function store(Request $request)
     {
     $request->validate([
@@ -66,7 +80,7 @@ class TimetableController extends Controller
     public function edit($id)
     {
         $timetable = Timetable::findOrFail($id);
-        return view('timetables.editTimetable', compact('timetable'));
+        return view('ManageTimetableviews.Adminviews.editTimetable', compact('timetable'));
     }
 
 
@@ -114,7 +128,7 @@ class TimetableController extends Controller
 
 
 
-
+    // function delete timetable 
     public function destroy($id)
     {
         $timetable = Timetable::findOrFail($id);

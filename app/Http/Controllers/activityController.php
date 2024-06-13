@@ -131,6 +131,14 @@ class ActivityController extends Controller
 
         $participant->status = 'Registered';
 
+        // Fetch the associated activity
+        $activity = $participant->activity;
+        if ($activity->activityCapacity <= 0) {
+            return redirect()->route('displayRegistration')->with('error', 'No available capacity for this activity.');
+        }
+        // Decrement the activity's capacity
+        $activity->decrement('activityCapacity');
+
         $participant->save();
         return redirect()->route('displayRegistration')->with('status', 'Participant registered successfully!');
     }
@@ -189,7 +197,7 @@ class ActivityController extends Controller
 
 
 
-    //PARENTS
+    //PARENTSsssssssss
 
     //Display Activity to register
     public function displayActivity() 
@@ -213,7 +221,7 @@ class ActivityController extends Controller
     // Register Activity
     public function registerActivity($activityId)
     {
-        // Assuming you have authentication set up and the user is logged in
+        // authentication set up and the user is logged in
         $user = Auth::user();
 
         // Fetch the first student associated with the user
@@ -231,8 +239,24 @@ class ActivityController extends Controller
         $participant->status = 'Pending';
         $participant->save();
 
-        return redirect()->route('displayActivity')->with('status', 'Participant registered successfully!');
+        return redirect()->route('displayActivity')->with('status', 'Activity registration applied successfully');
     }
+
+
+    public function displayRegisteredActivity() {
+        // Get the authenticated user ID
+        $userId = Auth::id();
     
+        // Fetch activities registered by the authenticated user with the 'Registered' status
+        $registered_data = ActivityParticipant::with('activity')
+                        ->where('usersId', $userId)
+                        ->where('status', 'Registered')
+                        ->get();
+    
+        // Pass the data to the view
+        return view('manageActivityView.parentsView.registeredActivityList', [
+            'registered_data' => $registered_data
+        ]);
+    }
 
 }
