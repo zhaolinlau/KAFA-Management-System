@@ -15,10 +15,10 @@ class StudentController extends Controller
 	 */
 	public function index(): View
 	{
-		if (auth()->user()->role == 'parent') {
-			return view('ManageStudentRegistration.Parent.RegistrationList', ['students' => Student::with('user')->where('user_id', auth()->user()->id)->get()]);
-		} elseif (auth()->user()->role == 'admin') {
+		if (auth()->user()->role == 'admin') {
 			return view('ManageStudentRegistration.Admin.RegistrationList', ['students' => Student::with('user')->get()]);
+		} elseif (auth()->user()->role == 'parent') {
+			return view('ManageStudentRegistration.Parent.RegistrationList', ['students' => Student::with('user')->where('user_id', auth()->user()->id)->get()]);
 		}
 	}
 
@@ -64,10 +64,10 @@ class StudentController extends Controller
 	 */
 	public function show(Student $student): View
 	{
-		if (auth()->user()->role == 'parent') {
-			return view('ManageStudentRegistration.Parent.StudentRegistrationForm', ['student' => $student]);
-		} elseif (auth()->user()->role == 'admin') {
+		if (auth()->user()->role == 'admin') {
 			return view('ManageStudentRegistration.Admin.StudentRegistrationForm', ['student' => $student]);
+		} elseif (auth()->user()->role == 'parent') {
+			return view('ManageStudentRegistration.Parent.StudentRegistrationForm', ['student' => $student]);
 		}
 	}
 
