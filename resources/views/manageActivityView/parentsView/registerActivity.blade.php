@@ -1,11 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
 
     <div id="main">
         @if (session('status'))
@@ -13,7 +8,6 @@
                 {{ session('status') }}
             </div>
         @endif
-
         <h1 id="title">Activity Registration</h1>
         <div style="float: right;">
             <a href="{{ route('displayActivity') }}">

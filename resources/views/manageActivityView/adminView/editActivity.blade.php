@@ -10,6 +10,11 @@
 
     {{-- Edit Form --}}
     <div id="main">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <h1 id="title">Edit Activity Form</h1>
         <!-- Edit activity form -->
         <form action="{{ url('createdActivity/' . $activity->activityId . '/update') }}" method="post">

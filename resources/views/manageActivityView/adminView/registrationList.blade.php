@@ -2,17 +2,16 @@
 
 @section('content')
 
-    @if (session('status'))
-        <div class="alert alert-success">
-             {{session('status')}}
-        </div>
-    @elseif (session('destroy'))
-        <div class="alert alert-danger">
-            {{session('destroy')}}
-        </div>
-    @endif
-
     <div id="main">
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{session('status')}}
+            </div>
+        @elseif (session('destroy'))
+            <div class="alert alert-danger">
+                {{session('destroy')}}
+            </div>
+        @endif
         <h1 id="title">Application List</h1>
         <div id="search">
             <form action="{{ route('searchRegistration') }}" method="GET">
@@ -71,7 +70,7 @@
     <style>
         #main{
             margin: auto;
-            width: 1200px;
+            width: 1400px;
         }
         #title{
             margin-bottom: 50px;
