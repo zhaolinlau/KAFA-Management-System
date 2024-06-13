@@ -78,6 +78,8 @@ Route::get('/timetables/{timetable}/edit', [TimetableController::class, 'edit'])
 Route::put('/timetables/{timetable}', [TimetableController::class, 'update'])->name('timetables.update')->middleware(['verified']);
 Route::delete('/timetables/{timetable}', [TimetableController::class, 'destroy'])->name('timetables.destroy')->middleware(['verified']);
 Route::get('partipate/activity', [ActivityController::class, 'displayRegisteredActivity'])->name('displayRegisteredActivity');
+
+
 // Module 3 - Manage Result (KELVIN HO RUI SHENG CB21058)
 Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('/results', [ResultController::class, 'index'])->name('results.index');

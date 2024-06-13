@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-4">
-    @if (auth()->user()->role == 'parent')
+    @if (auth()->user()->role == 'teacher')
     <h2>View Timetable</h2>
     <form action="{{ route('timetables.index') }}" method="GET">
         <div class="form-group">

@@ -61,6 +61,7 @@
             const daySelect = document.createElement('select');
             daySelect.name = 'days[]';
             daySelect.classList.add('form-control');
+            daySelect.innerHTML = '<option value="" selected>Select the day</option>';
             const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
             days.forEach(function (day) {
                 const option = document.createElement('option');
@@ -78,6 +79,7 @@
             const subjectSelect = document.createElement('select');
             subjectSelect.name = 'subject_name[][]';
             subjectSelect.classList.add('form-control');
+            subjectSelect.innerHTML = '<option value="" selected>Select the subject</option>';
             const subjects = ['UlumSyariahAkidahIbadah', 'Sirah', 'JawiKhat', 'AdabAkhlakIslamiah', 'LughatulQuran', 'AmaliSolat'];
             subjects.forEach(function (subject) {
                 const option = document.createElement('option');

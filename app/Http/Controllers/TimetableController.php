@@ -20,8 +20,10 @@ class TimetableController extends Controller
 
 		if (auth()->user()->role == 'admin') {
             return view('ManageTimetableviews.Adminviews.listTimetable', compact('timetables'));
-        } elseif (auth()->user()->role == 'parent') {
+        }elseif (auth()->user()->role == 'parent') {
             return view('ManageTimetableviews.Parentviews.studentTimetable', compact('timetables', 'timetable', 'class_name'));
+        }elseif (auth()->user()->role == 'teacher') {
+            return view('ManageTimetableviews.Teacherviews.teacherTimetable', compact('timetables', 'timetable', 'class_name'));
         }
     }
 
