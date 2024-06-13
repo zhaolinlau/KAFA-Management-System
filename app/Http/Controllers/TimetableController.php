@@ -8,17 +8,6 @@ use Illuminate\Http\Request;
 
 class TimetableController extends Controller
 {
-    // public function index()
-    // {
-    //     $timetables = Timetable::with('entries')->get();
-	// 	if (auth()->user()->role == 'admin') {
-	// 		return view('ManageTimetableviews.Adminviews.listTimetable',compact('timetables'));
-	// 	}
-    //     elseif (auth()->user()->role == 'parents') {
-	// 		return view('ManageTimetableviews.Parentsviews.studentTimetable',compact('timetables'));
-	// 	}
-    // }
-
     public function index(Request $request)
     {
         $class_name = $request->input('class_name');
