@@ -48,49 +48,6 @@
 										{{ Auth::user()->name }}
 									</a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            @endauth
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
-                aria-labelledby="offcanvasExampleLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">KAFAMS</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="nav flex-column nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ Route::is('students.index') ? 'active' : '' }}"
-                                href="{{ route('students.index') }}">Registration</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Activities</a>
-                        </li>
-						</li>
-                        <li class="nav-item">
-						<a class="nav-link {{ Route::is('results.index') ? 'active' : '' }}" href="{{ route('results.index') }}">Result</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ Route::is('timetables.index') ? 'active' : '' }}"
-                                href="{{ route('timetables.index') }}">Timetable</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            @yield('content')
-        </main>
-    </div>
 									<div class="dropdown-menu dropdown-menu-end border-0 shadow" aria-labelledby="navbarDropdown">
 										<a class="dropdown-item" href="{{ route('logout') }}"
 											onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -131,10 +88,12 @@
 							<li class="nav-item">
 								<a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
 							</li>
+							@if (auth()->user()->role != 'teacher')
 							<li class="nav-item">
 								<a class="nav-link {{ Route::is('students.index') ? 'active' : '' }}"
 									href="{{ route('students.index') }}">Registration</a>
 							</li>
+							@endif
 							@if (auth()->user()->role == 'admin')
 								<li class="nav-item">
 									<a class="nav-link {{ Route::is('displayRegistration') ? 'active' : '' }}"
