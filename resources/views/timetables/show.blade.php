@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="success-alert">
+        {{ session('success') }}
+    </div>
+@endif
+
 <div class="container mt-4">
     <h2>Timetable for Class: {{ $timetable->class_name }}</h2>
 
@@ -71,4 +77,33 @@
         </form>
     </div>
 </div>
+
+<script>
+     // Make alert message dissappear after three seconds
+     document.addEventListener('DOMContentLoaded', function () {
+        const alert = document.getElementById('success-alert') || document.getElementById('error-alert');
+        if (alert) {
+            // Automatically hide the alert after 3 seconds
+            setTimeout(() => {
+                alert.classList.add('fade');
+                // Remove the alert element from the DOM after it fades out
+                setTimeout(() => {
+                    alert.remove();
+                }, 150);
+            }, 3000);
+        }
+    });
+</script>
+
+{{-- CSS styling for alert page --}}
+<style>
+    .alert {
+        position: fixed;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1050;  
+        width: 50%;
+    }
+</style>
 @endsection
