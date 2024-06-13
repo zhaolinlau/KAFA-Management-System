@@ -38,7 +38,7 @@ class StudentController extends Controller
 		$request->validate([
 			'parent_ic_no' => 'required|numeric|max_digits:12|min_digits:12',
 			'parent_ic' => 'required|file|mimes:png,jpg,pdf',
-			'parent_contact' => 'required|string',
+			'parent_contact' => 'required|numeric|min_digits:9|max_digits:11',
 			'relationship' => 'required|string',
 			'student_name' => 'required|string',
 			'birthday' => 'required|date|string',
