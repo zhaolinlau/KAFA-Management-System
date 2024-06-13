@@ -16,7 +16,7 @@ class Student extends Model
     }
 	public function results()
     {
-        return $this->hasMany(Result::class, 'student_id');
+        return $this->hasMany(Result::class, 'id');
     }
 	protected $fillable = [
 		'parent_ic_no',

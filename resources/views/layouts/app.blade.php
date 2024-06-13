@@ -84,7 +84,7 @@
                         </li>
 						</li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::is('results.index') ? 'active' : '' }}" href="{{ route('results.index') }}">Result</a>
+						<a class="nav-link {{ Route::is('results.index') ? 'active' : '' }}" href="{{ route('results.index') }}">Result</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Route::is('timetables.index') ? 'active' : '' }}"

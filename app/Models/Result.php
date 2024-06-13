@@ -22,10 +22,8 @@ class Result extends Model
      */
     public function student()
     {
-        return $this->belongsTo(Student::class, 'id');
+        return $this->belongsTo(Student::class, 'id', 'id');
     }
 
-    protected $casts = [
-        'assessments' => 'array',
-    ];
+    
 }

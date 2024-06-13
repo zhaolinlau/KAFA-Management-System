@@ -1,30 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-3">
-    <h2>View Result</h2>
-    <p>Name: {{ $result->student->student_name }}</p>
-    <p>Matric Id: {{ $result->student_id }}</p>
-    <p>Year: {{ $result->student->year }}</p>
-    <p>Subject: {{ $result->Subject_name }}</p>
-    <table class="table mt-3">
+<div class="container mt-5">
+    @foreach ($results as $result)
+    <h1>View Marks for {{ $result->student->student_name }}</h1>
+    <h2>Subject: {{ $result->Subject_name }}</h2>
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Assessments</th>
+                <th>Assessment</th>
                 <th>Marks</th>
                 <th>Weightage</th>
                 <th>Grade</th>
             </tr>
         </thead>
         <tbody>
+            @php
+                $categories = json_decode($result->Categories) ?? [];
+                $marks = json_decode($result->Marks) ?? [];
+                $weightage = json_decode($result->Weightage) ?? [];
+            @endphp
+            @foreach($categories as $index => $category)
+                <tr>
+                    <td>{{ $category }}</td>
+                    <td>{{ $marks[$index] ?? '' }}</td>
+                    <td>{{ $weightage[$index] ?? '' }}%</td>
+                    <td>{{ $result->Grade }}</td>
+                </tr>
+            @endforeach
             <tr>
-                <td>Quiz</td>
-                <td>{{ $result->Marks }}</td>
-                <td>{{ $result->Weightage }}</td>
+                <td>Total</td>
+                <td>{{ array_sum($marks) }}</td>
+                <td>{{ array_sum($weightage) }}%</td>
                 <td>{{ $result->Grade }}</td>
             </tr>
         </tbody>
     </table>
-    <button class="btn btn-secondary">Back</button>
+    <a href="{{ route('parent.results.index') }}" class="btn btn-secondary">Back</a>
+    @endforeach
 </div>
 @endsection
