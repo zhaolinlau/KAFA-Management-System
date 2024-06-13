@@ -36,7 +36,7 @@ class StudentController extends Controller
 	public function store(Request $request): RedirectResponse
 	{
 		$request->validate([
-			'parent_ic_no' => 'required|string',
+			'parent_ic_no' => 'required|numeric|max_digits:12|min_digits:12',
 			'parent_ic' => 'required|file|mimes:png,jpg,pdf',
 			'parent_contact' => 'required|string',
 			'relationship' => 'required|string',
@@ -44,7 +44,7 @@ class StudentController extends Controller
 			'birthday' => 'required|date|string',
 			'birthplace' => 'required|string',
 			'permanent_address' => 'required|string',
-			'student_ic_no' => 'required|string',
+			'student_ic_no' => 'required|numeric|max_digits:12|min_digits:12',
 			'student_ic' => 'required|file|mimes:png,jpg,pdf',
 			'student_birthcert' => 'required|file|mimes:png,jpg,pdf',
 		]);
@@ -86,7 +86,7 @@ class StudentController extends Controller
 	{
 		$request->validate([
 			'status' => 'required|string',
-			'matric_no'=> 'required|string|min:7|max:7'
+			'matric_no' => 'required|string|min:7|max:7'
 		]);
 
 
