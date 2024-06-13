@@ -77,23 +77,21 @@
 							<div>
 								{{ $student->status }}
 							</div>
-							@error('status')
-								<div class="invalid-feedback">
-									{{ $message }}
-								</div>
-							@enderror
 						</div>
-						<div class="col-md-6 mb-3">
-							<label class="form-label" for="status">Matric Number</label>
-							<div>
-								{{ $student->matric_no }}
+						@if ($student->status == 'Approved')
+							<div class="col-md-6 mb-3">
+								<label class="form-label" for="matric_no">Matric Number</label>
+								<div>
+									{{ $student->matric_no }}
+								</div>
 							</div>
-							@error('matric_no')
-								<div class="invalid-feedback">
-									{{ $message }}
+							<div class="col-md-6 mb-3">
+								<label class="form-label" for="year">Year</label>
+								<div>
+									{{ $student->year }}
 								</div>
-							@enderror
-						</div>
+							</div>
+						@endif
 						<div class="col-12 mt-3">
 							<a class="btn btn-danger" href="{{ route('students.index', $student) }}">Back</a>
 						</div>
@@ -182,10 +180,20 @@
 							@enderror
 						</div>
 						<div class="col-md-6 mb-3">
-							<label class="form-label" for="status">Matric Number</label>
+							<label class="form-label" for="matric_no">Matric Number</label>
 							<input type="text" name="matric_no" class="form-control @error('matric_no') is-invalid @enderror"
 								value="{{ $student->matric_no }}">
 							@error('matric_no')
+								<div class="invalid-feedback">
+									{{ $message }}
+								</div>
+							@enderror
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label" for="year">Year</label>
+							<input type="text" name="year" class="form-control @error('year') is-invalid @enderror"
+								value="{{ $student->year }}">
+							@error('year')
 								<div class="invalid-feedback">
 									{{ $message }}
 								</div>

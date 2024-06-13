@@ -86,7 +86,8 @@ class StudentController extends Controller
 	{
 		$request->validate([
 			'status' => 'required|string',
-			'matric_no' => 'required|string|min:7|max:7'
+			'matric_no' => 'max:7|unique:students,matric_no,' . $student->id,
+			'year' => 'max:4',
 		]);
 
 

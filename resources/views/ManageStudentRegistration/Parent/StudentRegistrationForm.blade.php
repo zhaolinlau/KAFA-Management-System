@@ -199,12 +199,20 @@
 							{{ $student->status }}
 						</div>
 					</div>
-					<div class="col-md-6 mb-3">
-						<label class="form-label" for="status">Matric Number</label>
-						<div>
-							{{ $student->matric_no }}
+					@if ($student->status == 'Approved')
+						<div class="col-md-6 mb-3">
+							<label class="form-label" for="matric_no">Matric Number</label>
+							<div>
+								{{ $student->matric_no }}
+							</div>
 						</div>
-					</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label" for="year">Year</label>
+							<div>
+								{{ $student->year }}
+							</div>
+						</div>
+					@endif
 					<div class="col-12 mt-3">
 						<a class="btn btn-danger" href="{{ route('students.index', $student) }}">Back</a>
 					</div>
