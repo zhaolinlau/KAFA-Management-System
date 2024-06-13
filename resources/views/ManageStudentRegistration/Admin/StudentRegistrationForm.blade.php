@@ -77,12 +77,21 @@
 							<div>
 								{{ $student->status }}
 							</div>
-							@error('status')
-								<div class="invalid-feedback">
-									{{ $message }}
-								</div>
-							@enderror
 						</div>
+						@if ($student->status == 'Approved')
+							<div class="col-md-6 mb-3">
+								<label class="form-label" for="matric_no">Matric Number</label>
+								<div>
+									{{ $student->matric_no }}
+								</div>
+							</div>
+							<div class="col-md-6 mb-3">
+								<label class="form-label" for="year">Year</label>
+								<div>
+									{{ $student->year }}
+								</div>
+							</div>
+						@endif
 						<div class="col-12 mt-3">
 							<a class="btn btn-danger" href="{{ route('students.index', $student) }}">Back</a>
 						</div>
@@ -159,12 +168,32 @@
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="status">Registration Status</label>
 							<select class="form-control @error('status') is-invalid @enderror" name="status" id="status">
-								<option value="{{ $student->status }}" selected>{{ $student->status }}</option>
+								<option value="{{ $student->status }}" hidden selected>{{ $student->status }}</option>
 								<option value="Pending">Pending</option>
 								<option value="Approved">Approve</option>
 								<option value="Rejected">Reject</option>
 							</select>
 							@error('status')
+								<div class="invalid-feedback">
+									{{ $message }}
+								</div>
+							@enderror
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label" for="matric_no">Matric Number</label>
+							<input type="text" name="matric_no" class="form-control @error('matric_no') is-invalid @enderror"
+								value="{{ $student->matric_no }}">
+							@error('matric_no')
+								<div class="invalid-feedback">
+									{{ $message }}
+								</div>
+							@enderror
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label" for="year">Year</label>
+							<input type="text" name="year" class="form-control @error('year') is-invalid @enderror"
+								value="{{ $student->year }}">
+							@error('year')
 								<div class="invalid-feedback">
 									{{ $message }}
 								</div>

@@ -15,10 +15,10 @@ class StudentController extends Controller
 	 */
 	public function index(): View
 	{
-		if (auth()->user()->role == 'parent') {
-			return view('ManageStudentRegistration.Parent.RegistrationList', ['students' => Student::with('user')->where('user_id', auth()->user()->id)->get()]);
-		} elseif (auth()->user()->role == 'admin') {
+		if (auth()->user()->role == 'admin') {
 			return view('ManageStudentRegistration.Admin.RegistrationList', ['students' => Student::with('user')->get()]);
+		} elseif (auth()->user()->role == 'parent') {
+			return view('ManageStudentRegistration.Parent.RegistrationList', ['students' => Student::with('user')->where('user_id', auth()->user()->id)->get()]);
 		}
 	}
 
@@ -36,15 +36,15 @@ class StudentController extends Controller
 	public function store(Request $request): RedirectResponse
 	{
 		$request->validate([
-			'parent_ic_no' => 'required|string',
+			'parent_ic_no' => 'required|numeric|max_digits:12|min_digits:12',
 			'parent_ic' => 'required|file|mimes:png,jpg,pdf',
-			'parent_contact' => 'required|string',
+			'parent_contact' => 'required|numeric|min_digits:9|max_digits:11',
 			'relationship' => 'required|string',
 			'student_name' => 'required|string',
 			'birthday' => 'required|date|string',
 			'birthplace' => 'required|string',
 			'permanent_address' => 'required|string',
-			'student_ic_no' => 'required|string',
+			'student_ic_no' => 'required|numeric|max_digits:12|min_digits:12',
 			'student_ic' => 'required|file|mimes:png,jpg,pdf',
 			'student_birthcert' => 'required|file|mimes:png,jpg,pdf',
 		]);
@@ -64,10 +64,10 @@ class StudentController extends Controller
 	 */
 	public function show(Student $student): View
 	{
-		if (auth()->user()->role == 'parent') {
-			return view('ManageStudentRegistration.Parent.StudentRegistrationForm', ['student' => $student]);
-		} elseif (auth()->user()->role == 'admin') {
+		if (auth()->user()->role == 'admin') {
 			return view('ManageStudentRegistration.Admin.StudentRegistrationForm', ['student' => $student]);
+		} elseif (auth()->user()->role == 'parent') {
+			return view('ManageStudentRegistration.Parent.StudentRegistrationForm', ['student' => $student]);
 		}
 	}
 
@@ -85,7 +85,9 @@ class StudentController extends Controller
 	public function update(Request $request, Student $student): RedirectResponse
 	{
 		$request->validate([
-			'status' => 'required|string'
+			'status' => 'required|string',
+			'matric_no' => 'max:7|unique:students,matric_no,' . $student->id,
+			'year' => 'max:4',
 		]);
 
 

@@ -14,6 +14,10 @@ class Student extends Model
     {
         return $this->hasMany(ActivityParticipant::class, 'studentsId');
     }
+	public function results()
+    {
+        return $this->hasMany(Result::class, 'student_id');
+    }
 	protected $fillable = [
 		'parent_ic_no',
 		'parent_ic',

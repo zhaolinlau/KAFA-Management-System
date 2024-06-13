@@ -37,6 +37,9 @@
 						</button>
 
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav me-auto">
+
+							</ul>
 							<ul class="navbar-nav ms-auto">
 								<!-- Authentication Links -->
 								<li class="nav-item dropdown">
@@ -52,40 +55,71 @@
 										</a>
 
 										<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-											@csrf
-										</form>
+											<ul class="navbar-nav ms-auto">
+												<!-- Authentication Links -->
+												<li class="nav-item dropdown">
+													<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+														data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+														{{ Auth::user()->name }}
+													</a>
+
+													<div class="dropdown-menu dropdown-menu-end border-0 shadow" aria-labelledby="navbarDropdown">
+														<a class="dropdown-item" href="{{ route('logout') }}"
+															onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+															{{ __('Log Out') }}
+														</a>
+
+														<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+															@csrf
+														</form>
+													</div>
+												</li>
+											</ul>
 									</div>
-								</li>
-							</ul>
 						</div>
-					</div>
 				</nav>
+				<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+					<div class="offcanvas-header">
+						<h5 class="offcanvas-title" id="offcanvasExampleLabel">KAFAMS</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					</div>
+					<div class="offcanvas-body">
+						<ul class="nav flex-column nav-pills">
+							<li class="nav-item">
+								<a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link {{ Route::is('students.index') ? 'active' : '' }}"
+									href="{{ route('students.index') }}">Registration</a>
+							</li>
+							@if (auth()->user()->role == 'admin')
+								<li class="nav-item">
+									<a class="nav-link {{ Route::is('displayRegistration') ? 'active' : '' }}"
+										href="{{ route('displayRegistration') }}">Activity Registration</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link {{ Route::is('createdActivityList') ? 'active' : '' }}"
+										href="{{ route('createdActivityList') }}">Activities</a>
+								</li>
+							@elseif (auth()->user()->role == 'parent')
+								<li class="nav-item">
+									<a class="nav-link {{ Route::is('displayActivity') ? 'active' : '' }}"
+										href="{{ route('displayActivity') }}">Activity
+										Registration</a>
+								</li>
+							@endif
+							<li class="nav-item">
+								<a class="nav-link {{ Route::is('results.index') ? 'active' : '' }}"
+									href="{{ route('results.index') }}">Result</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link {{ Route::is('timetables.index') ? 'active' : '' }}"
+									href="{{ route('timetables.index') }}">Timetable</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			@endauth
-			<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-				<div class="offcanvas-header">
-					<h5 class="offcanvas-title" id="offcanvasExampleLabel">KAFAMS</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-				</div>
-				<div class="offcanvas-body">
-					<ul class="nav flex-column nav-pills">
-						<li class="nav-item">
-							<a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link {{ Route::is('students.index') ? 'active' : '' }}" href="{{route('students.index')}}">Registration</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Activities</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Result</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link {{ Route::is('timetables.index') ? 'active' : '' }}" href="{{ route('timetables.index') }}">Timetable</a>
-						</li>
-					</ul>
-				</div>
-			</div>
 			@yield('content')
 		</main>
 	</div>

@@ -6,20 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up()
-    {
-        Schema::create('timetables', function (Blueprint $table) {
-            $table->id();
-            $table->string('class_name');
-            $table->timestamps();
-        });
-    }
+	/**
+	 * Run the migrations.
+	 */
+	public function up()
+	{
+		Schema::create('timetables', function (Blueprint $table) {
+			$table->id();
+			$table->string('class_name');
+			$table->timestamps();
+		});
+	}
 
-    public function down()
-    {
-        Schema::dropIfExists('timetables');
-    }
+	public function down()
+	{
+		Schema::dropIfExists('timetables');
+	}
 };
