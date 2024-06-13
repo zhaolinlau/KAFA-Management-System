@@ -22,12 +22,12 @@ return new class extends Migration
 			$table->string('birthday');
 			$table->string('birthplace');
 			$table->string('permanent_address');
-			$table->string('student_ic_no')->unique();
+			$table->string('student_ic_no');
 			$table->string('student_ic');
 			$table->string('student_birthcert');
 			$table->string('status')->default('Pending');
-			$table->string('matric_no')->default('')->unique();
-			$table->string('year')->default('');
+			$table->string('matric_no')->default('')->unique()->nullable();
+			$table->string('year')->default('')->nullable();
 			$table->timestamps();
 		});
 	}
