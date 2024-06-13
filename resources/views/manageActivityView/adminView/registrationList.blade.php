@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
-    <title>Registration List</title>
-</head>
-
-<body>
+@section('content')
 
     @if (session('status'))
         <div class="alert alert-success">
@@ -25,15 +12,16 @@
         </div>
     @endif
 
-    <div>
-        <h2>Application List</h2>
-        <div>
+    <div id="main">
+        <h1 id="title">Application List</h1>
+        <div id="search">
             <form action="{{ route('searchRegistration') }}" method="GET">
-                <input type="text" name="search" class="form-control" placeholder="Enter Student Name" value="{{ request('search') }}">
-                <button type="submit" class="btn btn-primary">Search</button>
+                <input id="box-search" type="text" name="search" class="form-control" placeholder="Enter Student Name" value="{{ request('search') }}">
+                <button id="btn-search" type="submit" class="btn btn-dark">Search</button>
             </form>
         </div>
-        <div>
+        <br><br>
+        <div style="float: right;">
             <a href="{{route('displayRegistration')}}">
                 <button class="btn btn-secondary">Pending</button>
             </a>
@@ -46,6 +34,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th scope="col">No.</th>
                         <th scope="col">Activity Name</th>
                         <th scope="col">Activity Date</th>
                         <th scope="col">Student Name</th>
@@ -56,6 +45,7 @@
                 <tbody>
                     @foreach ($activityParticipants as $participant)
                         <tr>
+                            <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $participant->activity->activityName }}</td>
                             <td>{{ $participant->activity->activityDate }}</td>
                             <td>{{ $participant->student->student_name }}</td>
@@ -64,7 +54,7 @@
                                 <form action="{{ url('registration/' .$participant->participantId. '/approval' ) }}"
                                     method="POST">
                                     @csrf
-                                    <button type="submit" class="btn btn-primary" style="float: left;">Approve</button>
+                                    <button type="submit" class="btn btn-success" style="float: left;">Approve</button>
                                 </form>
                                 
                                 <a href="{{url('registration/' .$participant->participantId. '/reject')}}">
@@ -78,6 +68,31 @@
         </div>
     </div>
 
-</body>
+    <style>
+        #main{
+            margin: auto;
+            width: 1200px;
+        }
+        #title{
+            margin-bottom: 50px;
+            margin-top: 20px;
+            text-align: center;
+        }
 
-</html>
+        #search{
+            width: 680px;
+            /* max-width: fit-content; */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #box-search{
+            width: 600px;
+            float: left;
+        }
+        #btn-search{
+
+        }
+
+    </style>
+
+@endsection

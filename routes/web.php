@@ -26,6 +26,7 @@ Route::middleware(['verified'])->group(function () {
 	Route::get('/students/{student}/edit', [StudentController::class, 'edit'])->name('students.edit');
 	Route::put('/students/{student}', [StudentController::class, 'update'])->name('students.update');
 	Route::delete('/students/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
+	Route::resource('students', StudentController::class)->middleware(['verified']);
 });
 
 
@@ -62,3 +63,5 @@ Route::get('search/Participant', [ActivityController::class, 'searchParticipant'
 
 Route::get('delete/{participantId}/participant', [ActivityController::class, 'deleteParticipant'])->name('deleteParticipant');
 Route::resource('students', StudentController::class)->middleware(['verified']);
+
+Route::get('partipate/activity',[ActivityController::class,'displayRegisteredActivity'])->name('displayRegisteredActivity');
