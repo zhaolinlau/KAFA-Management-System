@@ -3,6 +3,7 @@
 use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ResultController;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -72,3 +73,14 @@ Route::get('search/Participant', [ActivityController::class, 'searchParticipant'
 
 Route::get('delete/{participantId}/participant', [ActivityController::class, 'deleteParticipant'])->name('deleteParticipant');
 Route::resource('students', StudentController::class)->middleware(['verified']);
+
+// Module 3 - Manage Result (KELVIN HO RUI SHENG CB21058)
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/results', [ResultController::class, 'index'])->name('results.index');
+    Route::get('/results/create', [ResultController::class, 'createResult'])->name('results.createResult');
+    Route::post('/results', [ResultController::class, 'storeResult'])->name('results.storeResult');
+    Route::get('/results/{id}', [ResultController::class, 'showResult'])->name('results.showResult');
+    Route::get('/results/{id}/edit', [ResultController::class, 'editResult'])->name('results.editResult');
+    Route::put('/results/{id}', [ResultController::class, 'updateResult'])->name('results.updateResult');
+    Route::delete('/results/{id}', [ResultController::class, 'destroyResult'])->name('results.destroyResult');
+});
