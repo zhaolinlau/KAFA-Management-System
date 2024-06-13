@@ -85,7 +85,8 @@ class StudentController extends Controller
 	public function update(Request $request, Student $student): RedirectResponse
 	{
 		$request->validate([
-			'status' => 'required|string'
+			'status' => 'required|string',
+			'matric_no'=> 'required|string|min:7|max:7'
 		]);
 
 
