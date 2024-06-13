@@ -30,7 +30,7 @@ Route::put('/timetables/{timetable}', [TimetableController::class, 'update'])->n
 Route::delete('/timetables/{timetable}', [TimetableController::class, 'destroy'])->name('timetables.destroy')->middleware(['verified']);
 
 // Module 1 - Manage Student Registration (LAU ZHAO LIN CB22039)
-Route::middleware(['verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 	Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
 	Route::post('/students', [StudentController::class, 'store'])->name('students.store');
@@ -43,7 +43,7 @@ Route::middleware(['verified'])->group(function () {
 
 // Module 2 - Manage Activity (MUHAMMAD AZIQUDDIN CB21057)
 Route::get('createActivity', function () {
-    return view('manageActivityView.adminView.createActivity');
+	return view('manageActivityView.adminView.createActivity');
 })->name('createActivity'); // Define named route here
 
 Route::post('submit', [activityController::class, 'create']);
@@ -66,7 +66,7 @@ Route::get('search/Registration', [ActivityController::class, 'searchRegistratio
 
 Route::post('registration/{participantId}/approval', [ActivityController::class, 'updateStatus'])->name('updateStatus');
 
-Route::get('registration/{participantId}/reject',[ActivityController::class, 'destroyRegistration'])->name('destroyRegistration');
+Route::get('registration/{participantId}/reject', [ActivityController::class, 'destroyRegistration'])->name('destroyRegistration');
 
 Route::get('display/participant', [ActivityController::class, 'displayParticipant'])->name('displayParticipant');
 
@@ -75,14 +75,14 @@ Route::get('search/Participant', [ActivityController::class, 'searchParticipant'
 Route::get('delete/{participantId}/participant', [ActivityController::class, 'deleteParticipant'])->name('deleteParticipant');
 Route::resource('students', StudentController::class)->middleware(['verified']);
 
-Route::get('partipate/activity',[ActivityController::class,'displayRegisteredActivity'])->name('displayRegisteredActivity');
+Route::get('partipate/activity', [ActivityController::class, 'displayRegisteredActivity'])->name('displayRegisteredActivity');
 // Module 3 - Manage Result (KELVIN HO RUI SHENG CB21058)
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/results', [ResultController::class, 'index'])->name('results.index');
-    Route::get('/results/create', [ResultController::class, 'createResult'])->name('results.createResult');
-    Route::post('/results', [ResultController::class, 'storeResult'])->name('results.storeResult');
-    Route::get('/results/{id}', [ResultController::class, 'showResult'])->name('results.showResult');
-    Route::get('/results/{id}/edit', [ResultController::class, 'editResult'])->name('results.editResult');
-    Route::put('/results/{id}', [ResultController::class, 'updateResult'])->name('results.updateResult');
-    Route::delete('/results/{id}', [ResultController::class, 'destroyResult'])->name('results.destroyResult');
+	Route::get('/results', [ResultController::class, 'index'])->name('results.index');
+	Route::get('/results/create', [ResultController::class, 'createResult'])->name('results.createResult');
+	Route::post('/results', [ResultController::class, 'storeResult'])->name('results.storeResult');
+	Route::get('/results/{id}', [ResultController::class, 'showResult'])->name('results.showResult');
+	Route::get('/results/{id}/edit', [ResultController::class, 'editResult'])->name('results.editResult');
+	Route::put('/results/{id}', [ResultController::class, 'updateResult'])->name('results.updateResult');
+	Route::delete('/results/{id}', [ResultController::class, 'destroyResult'])->name('results.destroyResult');
 });
