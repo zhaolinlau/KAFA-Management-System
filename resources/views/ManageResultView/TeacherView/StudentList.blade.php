@@ -1,15 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-3">
-    <h2>List of Students</h2>
-    <form method="GET" action="{{ route('results.index') }}">
-        <div class="input-group mb-3">
-            <input type="text" name="search" class="form-control" placeholder="Search by Name or Matric Id" value="{{ request('search') }}">
-            <button class="btn btn-primary" type="submit">Search</button>
-        </div>
+<div class="container mt-5">
+    <h1>Students</h1>
+    <form method="GET" action="{{ route('results.index') }}" class="form-inline mb-3">
+        <input type="text" name="search" class="form-control mr-2" placeholder="Search by name or matric number">
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
-    <table class="table mt-3">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>No</th>
@@ -19,25 +17,19 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($students as $index => $student)
+            @foreach($students as $student)
                 <tr>
-                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $student->matric_no }}</td>
                     <td>{{ $student->student_name }}</td>
                     <td>
-                        @php
-                            $finished = $student->results->count() > 0; // Adjust this logic as needed
-                        @endphp
-                        @if ($finished)
-                            <a href="{{ route('teacher.showSubject', $student->id) }}" class="text-success">Finished</a>
-                        @else
-                            <a href="{{ route('teacher.showSubject', $student->id) }}" class="text-danger">Unfinished</a>
-                        @endif
+                        <a href="{{ route('results.showSubject', $student->id) }}" class="btn btn-link">
+                            {{ $student->results->count() ? 'View Subjects' : 'No Subjects' }}
+                        </a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    <a href="{{ route('home') }}" class="btn btn-secondary">Back</a>
 </div>
 @endsection

@@ -88,10 +88,12 @@
 							<li class="nav-item">
 								<a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link {{ Route::is('students.index') ? 'active' : '' }}"
-									href="{{ route('students.index') }}">Registration</a>
-							</li>
+							@if (auth()->user()->role != 'teacher')
+								<li class="nav-item">
+									<a class="nav-link {{ Route::is('students.index') ? 'active' : '' }}"
+										href="{{ route('students.index') }}">Registration</a>
+								</li>
+							@endif
 							@if (auth()->user()->role == 'admin')
 								<li class="nav-item">
 									<a class="nav-link {{ Route::is('displayRegistration') ? 'active' : '' }}"
@@ -107,11 +109,12 @@
 										href="{{ route('displayActivity') }}">Activity
 										Registration</a>
 								</li>
+							@elseif (auth()->user()->role == 'teacher')
+								<li class="nav-item">
+									<a class="nav-link {{ Route::is('results.index') ? 'active' : '' }}"
+										href="{{ route('results.index') }}">Result</a>
+								</li>
 							@endif
-							<li class="nav-item">
-								<a class="nav-link {{ Route::is('results.index') ? 'active' : '' }}"
-									href="{{ route('results.index') }}">Result</a>
-							</li>
 							<li class="nav-item">
 								<a class="nav-link {{ Route::is('timetables.index') ? 'active' : '' }}"
 									href="{{ route('timetables.index') }}">Timetable</a>

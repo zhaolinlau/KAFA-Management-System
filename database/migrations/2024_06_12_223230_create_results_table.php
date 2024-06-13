@@ -12,17 +12,17 @@ class CreateResultsTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('results', function (Blueprint $table) {
-            $table->bigIncrements('Result_id');
-            $table->bigInteger('id')->unsigned();
-            $table->string('Subject_name')->nullable();
-            $table->json('assessments')->nullable();
-            $table->timestamps();
-    
-            $table->foreign('id')->references('id')->on('students')->onDelete('cascade');
-        });
-    }
+{
+    Schema::create('results', function (Blueprint $table) {
+        $table->id('Result_id');
+        $table->unsignedBigInteger('id'); // Foreign key linking to students table
+        $table->string('Subject_name')->nullable();
+        $table->string('Marks')->nullable();
+        $table->string('Categories')->nullable();
+        $table->string('Grade')->nullable();
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.

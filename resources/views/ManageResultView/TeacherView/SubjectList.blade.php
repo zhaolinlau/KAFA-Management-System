@@ -1,30 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-3">
-    <h2>List of Subjects</h2>
-    <p>Name: {{ $student->student_name }}</p>
-    <p>Matric Id: {{ $student->matric_no }}</p>
-    <p>Year: {{ $student->year }}</p>
-    <table class="table mt-3">
+<div class="container mt-5">
+    <h1>Subjects for {{ $student->student_name }}</h1>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Subject</th>
-                <th>Grade</th>
-                <th>Status</th>
+                <th>Progress</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($student->results as $result)
+            @foreach($student->results as $result)
                 <tr>
-                    <td>{{ $result->subject_name }}</td>
-                    <td>{{ $result->grade }}</td>
+                    <td>{{ $result->Subject_name }}</td>
                     <td>
-                        @if (!empty($result->grade))
-                            <a href="{{ route('results.showResult', ['id' => $result->id]) }}" class="text-success">Finished</a>
-                        @else
-                            <a href="{{ route('results.showResult', ['id' => $result->id]) }}" class="text-danger">Unfinished</a>
-                        @endif
+                        <a href="{{ route('results.showResult', $result->id) }}" class="btn btn-link">
+                            {{ $result->Grade ?? 'Unfinished' }}
+                        </a>
                     </td>
                 </tr>
             @endforeach

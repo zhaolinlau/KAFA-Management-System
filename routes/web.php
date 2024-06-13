@@ -41,7 +41,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 // Module 2 - Manage Activity (MUHAMMAD AZIQUDDIN CB21057)
-Route::get('createActivity', function () {return view('manageActivityView.adminView.createActivity');})->name('createActivity'); // Define named route here
+Route::get('createActivity', function () {
+	return view('manageActivityView.adminView.createActivity');
+})->name('createActivity'); // Define named route here
 Route::get('createActivity', function () {
 	return view('manageActivityView.adminView.createActivity');
 })->name('createActivity'); // Define named route here
@@ -56,7 +58,7 @@ Route::post('registerParticipant/{participantId}/register', [ActivityController:
 Route::get('registration/List', [ActivityController::class, 'displayRegistration'])->name('displayRegistration');
 Route::get('search/Registration', [ActivityController::class, 'searchRegistration'])->name('searchRegistration');
 Route::post('registration/{participantId}/approval', [ActivityController::class, 'updateStatus'])->name('updateStatus');
-Route::get('registration/{participantId}/reject',[ActivityController::class, 'destroyRegistration'])->name('destroyRegistration');
+Route::get('registration/{participantId}/reject', [ActivityController::class, 'destroyRegistration'])->name('destroyRegistration');
 
 Route::get('registration/{participantId}/reject', [ActivityController::class, 'destroyRegistration'])->name('destroyRegistration');
 
@@ -79,11 +81,17 @@ Route::get('partipate/activity', [ActivityController::class, 'displayRegisteredA
 
 // Module 3 - Manage Result (KELVIN HO RUI SHENG CB21058)
 Route::middleware(['auth', 'verified'])->group(function () {
+	Route::middleware(['role:parent'])->group(function () {
+		Route::get('/parent/results', [ResultController::class, 'parentIndex'])->name('parent.results.index');
+		Route::get('/parent/results/{id}/show', [ResultController::class, 'showResult'])->name('parent.results.showResult');
+	});
+	Route::resource('results', ResultController::class);
+
 	Route::get('/results', [ResultController::class, 'index'])->name('results.index');
-	Route::get('/results/create', [ResultController::class, 'createResult'])->name('results.createResult');
-	Route::post('/results', [ResultController::class, 'storeResult'])->name('results.storeResult');
-	Route::get('/results/{id}', [ResultController::class, 'showResult'])->name('results.showResult');
-	Route::get('/results/{id}/edit', [ResultController::class, 'editResult'])->name('results.editResult');
-	Route::put('/results/{id}', [ResultController::class, 'updateResult'])->name('results.updateResult');
-	Route::delete('/results/{id}', [ResultController::class, 'destroyResult'])->name('results.destroyResult');
+	Route::get('results/showSubject/{id}', [ResultController::class, 'showSubject'])->name('results.showSubject');
+	Route::get('/results/{id}/show', [ResultController::class, 'showResult'])->name('results.showResult');
+	Route::put('/results/updateResult/{id}', [ResultController::class, 'updateResult'])->name('results.updateResult');
+	Route::get('/results/editResult/{id}', [ResultController::class, 'editResult'])->name('results.editResult');
+	Route::delete('/results/destroyResult/{id}', [ResultController::class, 'destroyResult'])->name('results.destroyResult');
+	Route::post('/results/{id}/addRow', [ResultController::class, 'addRow'])->name('results.addRow');
 });
