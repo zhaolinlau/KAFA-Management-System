@@ -83,6 +83,17 @@
 								</div>
 							@enderror
 						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label" for="status">Matric Number</label>
+							<div>
+								{{ $student->matric_no }}
+							</div>
+							@error('matric_no')
+								<div class="invalid-feedback">
+									{{ $message }}
+								</div>
+							@enderror
+						</div>
 						<div class="col-12 mt-3">
 							<a class="btn btn-danger" href="{{ route('students.index', $student) }}">Back</a>
 						</div>
@@ -165,6 +176,15 @@
 								<option value="Rejected">Reject</option>
 							</select>
 							@error('status')
+								<div class="invalid-feedback">
+									{{ $message }}
+								</div>
+							@enderror
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label" for="status">Matric Number</label>
+							<input type="text" name="matric_no" class="form-control @error('matric_no') is-invalid @enderror" value="{{ $student->matric_no }}">
+							@error('matric_no')
 								<div class="invalid-feedback">
 									{{ $message }}
 								</div>

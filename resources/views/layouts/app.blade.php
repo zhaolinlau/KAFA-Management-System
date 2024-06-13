@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'KAFA') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -38,6 +38,7 @@
                         </button>
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<<<<<<< HEAD
                             <ul class="navbar-nav me-auto">
 
                             </ul>
@@ -57,6 +58,25 @@
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+=======
+                            <ul class="navbar-nav ms-auto">
+                                <!-- Authentication Links -->
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }}
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-end border-0 shadow"
+                                        aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            {{ __('Log Out') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="d-none">
+>>>>>>> e817b58ef96ee8fe46ef86d798c3424ef2d50730
                                             @csrf
                                         </form>
                                     </div>
@@ -65,6 +85,7 @@
                         </div>
                     </div>
                 </nav>
+<<<<<<< HEAD
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
                     aria-labelledby="offcanvasExampleLabel">
                     <div class="offcanvas-header">
@@ -104,6 +125,38 @@
                     </div>
                 </div>
             @endauth
+=======
+            @endauth
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">KAFAMS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="nav flex-column nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('students.index') ? 'active' : '' }}"
+                                href="{{ route('students.index') }}">Registration</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Activities</a>
+                        </li>
+						</li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('results.index') ? 'active' : '' }}" href="{{ route('results.index') }}">Result</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('timetables.index') ? 'active' : '' }}"
+                                href="{{ route('timetables.index') }}">Timetable</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+>>>>>>> e817b58ef96ee8fe46ef86d798c3424ef2d50730
             @yield('content')
         </main>
     </div>
