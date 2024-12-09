@@ -24,11 +24,15 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="parent_contact">Parent Contact</label>
-							{{ $student->parent_contact }}
+							<div>
+								{{ $student->parent_contact }}
+							</div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="relationship">Relationship</label>
-							{{ $student->relationship }}
+							<div>
+								{{ $student->relationship }}
+							</div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label class="form-label" for="student_name">Student Name</label>
